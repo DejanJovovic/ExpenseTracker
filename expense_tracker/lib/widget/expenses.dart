@@ -1,4 +1,5 @@
 import 'package:expense_tracker/widget/expenses_list/expenses_list.dart';
+import 'package:expense_tracker/widget/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/models/expense.dart';
 
@@ -28,9 +29,27 @@ final List<Expense> _registeredExpenses = [
   ),
 ];
 
+
+void _openAddExpenseOverlay(){
+  showModalBottomSheet( // a pop up window
+    context: context,
+    builder: (ctx) => // here we display what happens when the plus button is clicked and user is moved to the next screen
+      const NewExpense(),
+    );
+}
+
+
 @override
   Widget build(BuildContext context) { 
     return Scaffold( // it sends the background of the app to white by default
+      appBar: AppBar( // to add appbar at the top of the screen
+        title: const Text('Flutter ExpenseTracker'),
+        actions: [
+          IconButton(
+            onPressed: _openAddExpenseOverlay, 
+            icon: const Icon(Icons.add))
+        ],
+      ),
       body: Column(
         children: [
           const Text('The chart'),

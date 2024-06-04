@@ -29,11 +29,11 @@ class ExpenseItem extends StatelessWidget {
                 const Spacer(), // can be used in any column or row, creates a widget that takes all the space it can get between the other widget its displayed, in this case row will take all the space
                 Row( // category and date are grouped so we use row
                   children: [
-                    const Icon(Icons.alarm),
+                    Icon(categoryIcons[expense.category]),
                     const SizedBox(
                       width: 8,
                     ),
-                    Text(expense.date.toString()),
+                    Text(expense.formattedDate),
                   ],
                 )
               ],
