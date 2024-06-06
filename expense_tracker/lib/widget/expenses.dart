@@ -32,10 +32,19 @@ final List<Expense> _registeredExpenses = [
 
 void _openAddExpenseOverlay(){
   showModalBottomSheet( // a pop up window
+    isScrollControlled: true, // with this the pop up screen will take all the space
     context: context,
     builder: (ctx) => // here we display what happens when the plus button is clicked and user is moved to the next screen
-      const NewExpense(),
+      NewExpense(onAddExpense: _addExpense),
     );
+}
+
+void _addExpense(Expense expense){
+
+  setState(() {
+    _registeredExpenses.add(expense);
+  });
+  
 }
 
 
