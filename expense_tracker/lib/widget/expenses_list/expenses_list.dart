@@ -22,6 +22,12 @@ class ExpensesList extends StatelessWidget {
           // allows the user to dismiss the expense by swiping away
           key: ValueKey(// creates a key object that can be used as key value
               expenses[index]),
+          background: Container( // shown when the user tries to swipe away the expense
+            color: Theme.of(context).colorScheme.error.withOpacity(0.75), // gives slightly transparent color vibe,
+            margin: EdgeInsets.symmetric(
+              horizontal: Theme.of(context).cardTheme.margin!.horizontal
+            ),
+          ),
           onDismissed: (direction) // this is what happens when the expense is dismissed or swiped away
             { 
           onRemoveExpense(expenses[index]);
