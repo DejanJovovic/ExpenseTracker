@@ -55,7 +55,8 @@ class _ExpensesState extends State<Expenses> {
       _registeredExpenses.remove(expense);
     });
 
-    ScaffoldMessenger.of(context).clearSnackBars(); // which removes any snackBars/info messages we might still have on the screen
+    ScaffoldMessenger.of(context)
+        .clearSnackBars(); // which removes any snackBars/info messages we might still have on the screen
     // snackBar is info message shown on the screen
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -83,6 +84,8 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = (MediaQuery.of(context).size.width);
+
     Widget mainContent = const Center(
       // if there aren't any expenses shown on the screen this text is shown
       child: Text("No expenses found. Start adding some!"),
@@ -104,12 +107,24 @@ class _ExpensesState extends State<Expenses> {
               onPressed: _openAddExpenseOverlay, icon: const Icon(Icons.add))
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(child: mainContent),
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              // checks if the device is in portrait or landscape mode, and shows a column or row depending on it
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(child: mainContent),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded( // expended constraints the child to only take as much width as available in the Row after sizing the other Row children
+                  child: Chart(
+                    expenses: _registeredExpenses)
+                    ),
+                Expanded
+                (child: mainContent),
+              ],
+            ),
     );
   }
 }
