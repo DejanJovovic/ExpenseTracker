@@ -31,6 +31,7 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true, // makes sure that we stay away from device features that might be affecting the UI
       // a pop up window
       isScrollControlled:
           true, // with this the pop up screen will take all the space
